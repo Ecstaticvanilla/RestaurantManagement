@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+</head>
+<body>
+    <h1>Order ID: <%= order.order_id %></h1>
+    <p>Customer ID: <%= order.customer_id %></p>
+    <p>Order Date: <%= order.order_date %></p>
+    <p>Status: <%= order.status %></p>
+    <p>Total Amount: <%= order.total_amount %></p>
+
+    <h2>Order Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Menu Item ID</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orderItems.forEach(item => { %>
+                <tr>
+                    <td><%= item.menu_item_id %></td>
+                    <td><%= item.quantity %></td>
+                    <td><%= item.price %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <h2>Add Item to Order</h2>
+    <form action="/orders/<%= order.order_id %>/items" method="POST">
+        <label for="menu_item_id">Menu Item:</label>
+        <select name="menu_item_id" id="menu_item_id" required>
+            <% menuItems.forEach(item => { %>
+                <option value="<%= item.menu_item_id %>"><%= item.name %></option>
+            <% }) %>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    <a href="/orders">Back to Orders</a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Order</title>
+</head>
+<body>
+    <h1>Create New Order</h1>
+    <form action="/orders" method="POST">
+        <label for="customer_id">Customer:</label>
+        <select name="customer_id" id="customer_id" required>
+            <% customers.forEach(customer => { %>
+                <option value="<%= customer.customer_id %>"><%= customer.first_name %> <%= customer.last_name %></option>
+            <% }) %>
+        </select>
+
+        <label for="status">Status:</label>
+        <input type="text" name="status" required>
+
+        <button type="submit">Create Order</button>
+    </form>
+
+    <h2>Add Items to Order</h2>
+    <!-- This form should be added to order details after an order is created -->
+</body>
+</html>
