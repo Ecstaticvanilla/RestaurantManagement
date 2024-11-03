@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Items</title>
+</head>
+<a href="http://localhost:5500/views/mainpage.html" target="_blank">HOME PAGE </a>
+<body>
+    <h1>Menu Items</h1>
+    <a href="/menuitems/new">Add New Item</a>
+    <ul>
+        <% items.forEach(item => { %>
+            <li>
+                <strong><%= item.name %></strong>: <%= item.description %> - $<%= item.price %>
+                <a href="/menuitems/edit/<%= item.menu_item_id %>">Edit</a>
+                <form action="/menuitems/delete/<%= item.menu_item_id %>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

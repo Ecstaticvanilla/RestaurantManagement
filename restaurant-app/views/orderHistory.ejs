@@ -1,0 +1,35 @@
+<!-- In orderHistory.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order History for <%= customer.first_name %> <%= customer.last_name %></title>
+    <link rel="stylesheet" href="/styles.css"> 
+</head>
+<body>
+    <h1>Order History for <%= customer.first_name %> <%= customer.last_name %></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(order => { %>
+                <tr>
+                    <td><%= order.order_id %></td>
+                    <td><%= order.order_date %></td>
+                    <td><%= order.status %></td>
+                    <td>
+                        <!-- You can add actions here if needed -->
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/customers">Back to Customers</a>
+</body>
+</html>
