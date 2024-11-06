@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Orders</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
-<a href="http://localhost:5500/views/mainpage.html" target="_blank">HOME PAGE</a>
+<a href="http://localhost:5500/restaurant-app/views/index.html" target="_blank">HOME PAGE</a>
 <body>
     <h1>Orders</h1>
     <a href="/orders/new">Create New Order</a>
@@ -38,4 +38,340 @@
         </tbody>
     </table>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Font for header -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playwrite GB S', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ff5722; /* Orange background */
+            padding: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            transition: letter-spacing 0.3s ease, transform 0.3s ease;
+        }
+
+        header h1:hover {
+            letter-spacing: 3px;
+            transform: scale(1.1);
+        }
+
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background-color: #ff5722; /* Consistent orange color */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e64a19; /* Slightly darker orange on hover */
+            transform: scale(1.05);
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff5722; /* Table header with the same orange */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #ffe0b2; /* Light hover effect */
+        }
+
+        button {
+            background-color: #ff5722; /* Button same as header color */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e64a19; /* Darker on hover */
+        }
+
+        /* Style for the new "View Details" link */
+        .view-details {
+            text-decoration: none;
+            color: #ff5722;
+            font-weight: bold;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+
+        .view-details:hover {
+            color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Orders</h1>
+</header>
+
+<nav>
+    <a href="/orders/new" target="_blank">Create New Order</a>
+    <a href="http://localhost:5500/restaurant-app/views/index.html" target="_blank">Home Page</a>
+</nav>
+
+<div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+                <th>Order Date</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(order => { %>
+                <tr>
+                    <td><%= order.order_id %></td>
+                    <td><%= order.customer_id %></td>
+                    <td><%= order.order_date %></td>
+                    <td>$<%= order.total_amount %></td>
+                    <td><%= order.status || 'Pending' %></td>
+                    <td>
+                        <!-- View Details Link -->
+                        <a href="/orders/<%= order.order_id %>" class="view-details" target="_blank">View Details</a>
+                        
+                        <!-- Delete Order Form -->
+                        <form action="/orders/<%= order.order_id %>/delete" method="POST" style="display:inline;">
+                            <button type="submit">Delete Order</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+</body>
 </html>
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playwrite GB S', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ff5722; /* Orange background */
+            padding: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            transition: letter-spacing 0.3s ease, transform 0.3s ease;
+        }
+
+        header h1:hover {
+            letter-spacing: 3px;
+            transform: scale(1.1);
+        }
+
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background-color: #ff5722; /* Consistent orange color */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e64a19; /* Slightly darker orange on hover */
+            transform: scale(1.05);
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff5722; /* Table header with the same orange */
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #ffe0b2; /* Light hover effect */
+        }
+
+        button {
+            background-color: #ff5722; /* Button same as header color */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e64a19; /* Darker on hover */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Orders</h1>
+</header>
+
+<nav>
+    <a href="/orders/new" target="_blank">Create New Order</a>
+    <a href="http://localhost:5500/restaurant-app/views/index.html" target="_blank">Home Page</a>
+</nav>
+
+<div class="content">
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+                <th>Order Date</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(order => { %>
+                <tr>
+                    <td><%= order.order_id %></td>
+                    <td><%= order.customer_id %></td>
+                    <td><%= order.order_date %></td>
+                    <td>$<%= order.total_amount %></td>
+                    <td><%= order.status || 'Pending' %></td>
+                    <td>
+                        <form action="/orders/<%= order.order_id %>/delete" method="POST" style="display:inline;">
+                            <button type="submit">Delete Order</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
+ -->

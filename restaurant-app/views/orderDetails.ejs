@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -47,5 +47,174 @@
     </form>
 
     <a href="/orders">Back to Orders</a>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="/styles.css"> 
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playwrite GB S', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff5722;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            font-size: 2rem;
+            color: #ff5722;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #ffe0b2;
+        }
+
+        form {
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        a:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Order ID: <%= order.order_id %></h1>
+    <p>Customer ID: <%= order.customer_id %></p>
+    <p>Order Date: <%= order.order_date %></p>
+    <p>Status: <%= order.status %></p>
+    <p>Total Amount: $<%= order.total_amount %></p>
+
+    <h2>Order Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Menu Item ID</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orderItems.forEach(item => { %>
+                <tr>
+                    <td><%= item.menu_item_id %></td>
+                    <td><%= item.quantity %></td>
+                    <td>$<%= item.price %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <h2>Add Item to Order</h2>
+    <form action="/orders/<%= order.order_id %>/items" method="POST">
+        <label for="menu_item_id">Menu Item:</label>
+        <select name="menu_item_id" id="menu_item_id" required>
+            <% menuItems.forEach(item => { %>
+                <option value="<%= item.menu_item_id %>"><%= item.name %></option>
+            <% }) %>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" required>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    <a href="/orders">Back to Orders</a>
+
 </body>
 </html>

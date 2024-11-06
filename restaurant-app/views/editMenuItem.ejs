@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,5 +12,163 @@
         <input type="number" name="price" value="<%= item.price %>" step="0.01" required>
         <button type="submit">Update</button>
     </form>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Font for header -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Playwrite+GB+S:ital,wght@0,100..400;1,100..400&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Menu Item</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playwrite GB S', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ff5722; /* Orange background */
+            padding: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            transition: letter-spacing 0.3s ease, transform 0.3s ease;
+        }
+
+        header h1:hover {
+            letter-spacing: 3px;
+            transform: scale(1.1);
+        }
+
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background-color: #ff5722; /* Consistent orange color */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            margin: 0 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #e64a19; /* Slightly darker orange on hover */
+            transform: scale(1.05);
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #ff5722; /* Button same as header color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #e64a19; /* Darker on hover */
+            transform: scale(1.05);
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #ff5722;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        a:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Edit Menu Item</h1>
+</header>
+
+<nav>
+    <a href="/menuitems">Back to Menu Items</a>
+</nav>
+
+<div class="content">
+    <form action="/menuitems/edit/<%= item.menu_item_id %>" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="<%= item.name %>" required>
+
+        <label for="description">Description:</label>
+        <textarea name="description" rows="4" required><%= item.description %></textarea>
+
+        <label for="price">Price:</label>
+        <input type="number" name="price" value="<%= item.price %>" step="0.01" required>
+
+        <button type="submit">Update Menu Item</button>
+    </form>
+</div>
+
 </body>
 </html>

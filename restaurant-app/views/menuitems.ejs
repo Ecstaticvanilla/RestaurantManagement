@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Menu Items</title>
 </head>
-<a href="http://localhost:5500/views/mainpage.html" target="_blank">HOME PAGE </a>
+<a href="http://localhost:5500/restaurant-app/views/index.html" target="_blank">HOME PAGE </a>
 <body>
     <h1>Menu Items</h1>
     <a href="/menuitems/new">Add New Item</a>
@@ -20,4 +20,404 @@
         <% }) %>
     </ul>
 </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Items</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playwrite GB S', sans-serif;
+            background-color: #f3f3f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ff5722;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: letter-spacing 0.3s ease, transform 0.3s ease;
+        }
+
+        header h1:hover {
+            letter-spacing: 4px;
+            transform: scale(1.1);
+        }
+
+        nav {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background-color: #ff5722;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            margin: 0 15px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e64a19;
+            transform: translateY(-4px);
+        }
+
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        /* Flexbox Layout for Menu Items */
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .menu-item {
+            background-color: #ffffff;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: calc(22%);  /* 3 items per row */
+            min-width: 100px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-details {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .item-description {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            color: #ff5722;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .actions {
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        button, a {
+            background-color: #ff5722;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 25px;
+            border: none;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        button:hover, a:hover {
+            background-color: #e64a19;
+            transform: translateY(-4px);
+        }
+
+        form {
+            display: inline;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 900px) {
+            .menu-item {
+                width: calc(50% - 20px);  /* 2 items per row */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-item {
+                width: 100%;  /* 1 item per row */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Menu</h1>
+</header>
+
+<nav>
+    <a href="http://localhost:5500/restaurant-app/views/index.html" target="_blank">Home Page</a>
+    <a href="/menuitems/new">Add New Item</a>
+</nav>
+
+<div class="content">
+    <div class="menu-items">
+        <% items.forEach(item => { %>
+            <div class="menu-item">
+                <div class="item-details">
+                    <strong><%= item.name %></strong>
+                </div>
+                <div class="item-description">
+                    <%= item.description %>
+                </div>
+                <div class="item-price">
+                    $<%= item.price %>
+                </div>
+                <div class="actions">
+                    <a href="/menuitems/edit/<%= item.menu_item_id %>">Edit</a>
+                    <form action="/menuitems/delete/<%= item.menu_item_id %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>
+
+</body>
 </html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Items</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playwrite GB S', sans-serif;
+            background-color: #f3f3f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ff5722;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: letter-spacing 0.3s ease, transform 0.3s ease;
+        }
+
+        header h1:hover {
+            letter-spacing: 4px;
+            transform: scale(1.1);
+        }
+
+        nav {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            background-color: #ff5722;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            margin: 0 15px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #e64a19;
+            transform: translateY(-4px);
+        }
+
+        .content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        li {
+            background-color: #ffffff;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: calc(33.333% - 20px);
+            min-width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        li:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-details {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .item-description {
+            font-size: 1rem;
+            color: #777;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            color: #ff5722;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .actions {
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        button, a {
+            background-color: #ff5722;
+            color: white;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 25px;
+            border: none;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        button:hover, a:hover {
+            background-color: #e64a19;
+            transform: translateY(-4px);
+        }
+
+        form {
+            display: inline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 900px) {
+            li {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            li {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Menu Items</h1>
+</header>
+
+<nav>
+    <a href="http://localhost:5500/restaurant-app/views/index.html" target="_blank">Home Page</a>
+    <a href="/menuitems/new">Add New Item</a>
+</nav>
+
+<div class="content">
+    <ul>
+        <% items.forEach(item => { %>
+            <li>
+                <div class="item-details">
+                    <strong><%= item.name %></strong>
+                </div>
+                <div class="item-description">
+                    <%= item.description %>
+                </div>
+                <div class="item-price">
+                    $<%= item.price %>
+                </div>
+                <div class="actions">
+                    <a href="/menuitems/edit/<%= item.menu_item_id %>">Edit</a>
+                    <form action="/menuitems/delete/<%= item.menu_item_id %>" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </div>
+            </li>
+        <% }) %>
+    </ul>
+</div>
+
+</body>
+</html> -->
