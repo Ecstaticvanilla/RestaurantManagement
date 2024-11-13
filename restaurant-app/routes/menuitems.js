@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); 
-
+// const isAuthenticated = require('../middleware/auth');
+// router.use(isAuthenticated); 
 router.get('/', (req, res) => {
     db.query('SELECT * FROM menuitems', (err, results) => {
         if (err) throw err;

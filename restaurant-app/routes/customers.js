@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db'); 
+// const isAuthenticated = require('../middleware/auth');
+
+// router.use(isAuthenticated); 
 
 // Get all customers
 router.get('/', (req, res) => {
@@ -16,7 +19,7 @@ router.get('/new', (req, res) => {
 });
 
 // Add new customer
-router.post('/', (req, res) => {
+router.post('/',(req, res) => {
     const { first_name, last_name, email, phone_number } = req.body;
     db.query('INSERT INTO customers (first_name, last_name, email, phone_number) VALUES (?, ?, ?, ?)', 
     [first_name, last_name, email, phone_number], (err) => {
@@ -73,7 +76,7 @@ router.get('/orders/:id', (req, res) => {
 });
 
 // Assign Order (Create a new route)
-router.post('/assign/:customerId', (req, res) => {
+router.post('/assign/:customerId',(req, res) => {
     const customerId = req.params.customerId;
     const { orderId } = req.body; // Assume order ID is sent in the request body
 

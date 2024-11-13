@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
+// const isAuthenticated = require('../middleware/auth');
 
-// Get all orders
+// router.use(isAuthenticated); 
 router.get('/', (req, res) => {
     db.query('SELECT * FROM orders', (err, results) => {
         if (err) throw err;
@@ -101,5 +102,4 @@ router.post('/:id/delete', (req, res) => {
     });
 });
 
-module.exports = router;
 module.exports = router;
